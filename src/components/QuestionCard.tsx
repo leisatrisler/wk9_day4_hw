@@ -6,7 +6,6 @@ type QuestionCardProps = {
 }
 
 export default function QuestionCard({ question }: QuestionCardProps) {
-    // console.log(question);
     return (
         <Card className='mt-3'>
             <Card.Body id = "joker">

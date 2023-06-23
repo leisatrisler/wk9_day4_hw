@@ -47,7 +47,7 @@ export default function Home({ user, flashMessage }: HomeProps) {
         setHTML (true)
         setTimeout(() => {
             setHTML(false)
-          }, 7000);
+          }, 8000);
     }
 
     return (
