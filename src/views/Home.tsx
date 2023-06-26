@@ -22,8 +22,9 @@ export default function Home({ user, flashMessage }: HomeProps) {
         try {
           const response = await getAllQuestions();
           if (response.data) {
-            const responseData = Array.isArray(response.data) ? response.data : [response.data];
-            setQuestions(responseData);
+            // const responseData = Array.isArray(response.data) ? response.data : [response.data];
+            // setQuestions(responseData);
+            setQuestions(response.data.questions)
           }
         } catch (error) {
           console.log(error);

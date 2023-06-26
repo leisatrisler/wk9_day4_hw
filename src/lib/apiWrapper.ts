@@ -82,7 +82,7 @@ async function userLogin(email: string, password: string): Promise<APIResponse<T
     }
 }
 
-async function getAllQuestions(): Promise<APIResponse<QuestionType[]>> {
+async function getAllQuestions(): Promise<APIResponse<{questions:QuestionType[]}>> {
     let error;
     let data;
     try{
