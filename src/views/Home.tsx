@@ -7,35 +7,36 @@ import QuestionCard from '../components/QuestionCard';
 import image from '../images/hahaha.png'
 
 type HomeProps = {
-    user? : any|null
-    handleClick?: (e:React.MouseEvent) => void
-    flashMessage: (message: string|null) => void
-}
+    user: UserType | null;
+    handleClick?: (e: MouseEvent) => void;
+    flashMessage: (message: string | null) => void;
+  };
 
 export default function Home({ user, flashMessage }: HomeProps) {
-    const [questions, setQuestions] = useState<any>([]);
+    const [questions, setQuestions] = useState<QuestionType[]>([]);
+
+
     const [showHTML, setHTML] = useState (false);
+    
     const getQuestions = async () => {
         try {
-            const response = await getAllQuestions();
-            if (response.data) {
-                const responseData = Array.isArray(response.data) ? response.data : [response.data];
-            setQuestions(responseData[0].questions); //why does this finally work?
-            }
+          const response = await getAllQuestions();
+          if (response.data) {
+            const responseData = Array.isArray(response.data) ? response.data : [response.data];
+            setQuestions(responseData);
+          }
         } catch (error) {
-            console.log(error)
+          console.log(error);
         }
-    };
-    console.log(user)
+      };
 
     useEffect(() => {
-        //  getQuestions();
+            //
     }, []);
 
     const handleGetQuestions = async (event: React.FormEvent) => {
         event.preventDefault();
         await getQuestions();
-        // setHTML(false);
     };
 
     const handleSetQuestions = async () => {
@@ -52,11 +53,11 @@ export default function Home({ user, flashMessage }: HomeProps) {
 
     return (
         <>
-            <h1>{user ? `Questions Questions ${user?.user.username}` : "Riddle Me This" }</h1>
-            <Button className = "button1"onClick={handleGetQuestions}><strong>??? Riddles ???</strong></Button>
-            <Button className = "button2" onClick={handleSetQuestions}><strong>Insane In The Membrane</strong></Button>
-            {questions.map( q => q && <QuestionCard key={q.id + q.created_on} question={q} />)}
-            {showHTML && <img src={image}></img>}
+          <h1>{user ? `Questions: Question ${user.email}` : "Riddle Me This"}</h1>
+          <Button className="button1" onClick={handleGetQuestions}><strong>??? Riddles ???</strong></Button>
+          <Button className="button2" onClick={handleSetQuestions}><strong>Insane In The Membrane</strong></Button>
+          {questions.map((q) => q && <QuestionCard key={q.id + q.created_on} question={q} />)}
+          {showHTML && <img src={image} alt="Joker" />}
         </>
-    )
+      );
 }
